@@ -1,0 +1,27 @@
+{
+  "name": "freebsd",
+  "version": "13.5",
+  "category": "kernel",
+  "license": "bsd2",
+  "description": "FreeBSD kernel and base system",
+  "homepage": "https://www.freebsd.org",
+  "git": "https://git.freebsd.org/src.git",
+  "tar": "https://download.freebsd.org/releases/amd64/${version}-RELEASE/kernel.txz",
+  "build": {
+    "system": "make",
+    "deps": [
+      "clang",
+      "make",
+      "binutils",
+      "flex",
+      "bison"
+    ],
+    "configure": [
+      "make buildkernel KERNCONF=GENERIC"
+    ],
+    "compile": [],
+    "install": [
+      "make installkernel KERNCONF=GENERIC DESTDIR=$DESTDIR"
+    ]
+  }
+}

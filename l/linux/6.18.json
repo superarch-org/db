@@ -1,0 +1,41 @@
+{
+  "name": "linux",
+  "version": "6.18.1",
+  "category": "kernel",
+  "license": "gpl2",
+  "description": "The Linux kernel",
+  "tar": "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${version}.tar.xz",
+  "build": {
+    "system": "make",
+    "deps": [
+      "gcc",
+      "make",
+      "binutils",
+      "flex",
+      "bison",
+      "bc",
+      "cpio",
+      "perl",
+      "openssl",
+      "elfutils"
+    ],
+    "configure": [
+      "make defconfig"
+    ],
+    "compile": [
+      "make -j$(nproc)"
+    ],
+    "install": [
+      "make modules_install INSTALL_MOD_PATH=$DESTDIR",
+      "mkdir -p $DESTDIR/boot",
+      "cp arch/x86/boot/bzImage $DESTDIR/boot/vmlinuz-linux",
+      "cp System.map $DESTDIR/boot/System.map-linux"
+    ]
+  },
+  "install": {
+    "post": [
+      "mkinitcpio -p linux",
+      "bootctl update"
+    ]
+  }
+}

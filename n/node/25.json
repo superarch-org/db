@@ -1,0 +1,26 @@
+{
+  "name": "node",
+  "version": "25.2.1",
+  "license": "MIT",
+  "description": "V8-based JavaScript runtime",
+  "homepage": "https://nodejs.org",
+  "git": "https://github.com/nodejs/node",
+  "tar": "https://nodejs.org/dist/v${version}/node-v${version}.tar.gz",
+  "build": {
+    "system": "autotools",
+    "deps": [
+      "gcc",
+      "make",
+      "python3"
+    ],
+    "configure": [
+      "./configure --prefix=$PREFIX"
+    ],
+    "compile": [
+      "make -j$(nproc)"
+    ],
+    "install": [
+      "make install DESTDIR=$DESTDIR"
+    ]
+  }
+}

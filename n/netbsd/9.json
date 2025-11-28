@@ -1,0 +1,25 @@
+{
+  "name": "netbsd",
+  "version": "9.4",
+  "category": "kernel",
+  "license": "bsd",
+  "description": "NetBSD kernel and base system",
+  "homepage": "https://www.netbsd.org",
+  "tar": "https://cdn.netbsd.org/pub/NetBSD/NetBSD-${version}/source/sets/src.tgz",
+  "build": {
+    "system": "make",
+    "deps": [
+      "gcc",
+      "make",
+      "binutils"
+    ],
+    "configure": [
+      "./build.sh -U -m amd64 kernel=GENERIC"
+    ],
+    "compile": [],
+    "install": [
+      "cd sys/arch/amd64/compile/GENERIC",
+      "cp netbsd $DESTDIR/netbsd"
+    ]
+  }
+}

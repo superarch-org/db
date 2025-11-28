@@ -1,0 +1,37 @@
+{
+  "name": "runit",
+  "version": "2.1.2",
+  "category": "init",
+  "license": "bsd3",
+  "description": "Unix init scheme with service supervision",
+  "homepage": "http://smarden.org/runit/",
+  "tar": "http://smarden.org/runit/runit-${version}.tar.gz",
+  "supports": {
+    "kernels": [
+      "linux",
+      "freebsd",
+      "openbsd",
+      "netbsd"
+    ]
+  },
+  "build": {
+    "system": "make",
+    "deps": [
+      "gcc",
+      "make"
+    ],
+    "configure": [
+      "cd runit-${version}/src",
+      "echo 'gcc -O2 -Wall' > conf-cc",
+      "echo 'gcc -s' > conf-ld"
+    ],
+    "compile": [
+      "make"
+    ],
+    "install": [
+      "mkdir -p $DESTDIR$PREFIX/bin $DESTDIR$PREFIX/sbin",
+      "cp -f runit runsvdir runsvchdir sv svlogd chpst utmpset $DESTDIR$PREFIX/bin/",
+      "cp -f runit-init $DESTDIR$PREFIX/sbin/"
+    ]
+  }
+}

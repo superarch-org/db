@@ -1,0 +1,36 @@
+{
+  "name": "bash",
+  "version": "5.3",
+  "license": "gpl3",
+  "description": "The GNU Bourne Again shell",
+  "tar": "https://ftp.gnu.org/gnu/bash/bash-${version}.tar.gz",
+  "build": {
+    "system": "autotools",
+    "deps": [
+      "gcc",
+      "make",
+      "bison",
+      "ncurses"
+    ],
+    "configure": [
+      "./configure --prefix=$PREFIX --without-bash-malloc --with-installed-readline"
+    ],
+    "compile": [
+      "make -j$(nproc)"
+    ],
+    "install": [
+      "make install DESTDIR=$DESTDIR"
+    ]
+  },
+  "run": {
+    "deps": [
+      "ncurses",
+      "readline"
+    ]
+  },
+  "install": {
+    "post": [
+      "ln -sf bash $DESTDIR$PREFIX/bin/sh"
+    ]
+  }
+}

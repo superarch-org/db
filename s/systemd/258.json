@@ -1,0 +1,35 @@
+{
+  "name": "systemd",
+  "version": "258.3",
+  "category": "init",
+  "license": "lgpl2.1",
+  "description": "System and service manager",
+  "homepage": "https://systemd.io",
+  "tar": "https://github.com/systemd/systemd/archive/v${version}.tar.gz",
+  "supports": {
+    "kernels": [
+      "linux"
+    ]
+  },
+  "build": {
+    "system": "meson",
+    "deps": [
+      "gcc",
+      "meson",
+      "ninja",
+      "python3",
+      "gperf",
+      "libcap",
+      "util-linux"
+    ],
+    "configure": [
+      "meson setup build --prefix=$PREFIX -Dsysconfdir=/etc -Dlocalstatedir=/var"
+    ],
+    "compile": [
+      "ninja -C build"
+    ],
+    "install": [
+      "DESTDIR=$DESTDIR ninja -C build install"
+    ]
+  }
+}

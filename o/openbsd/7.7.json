@@ -1,0 +1,28 @@
+{
+  "name": "openbsd",
+  "version": "7.7",
+  "category": "kernel",
+  "license": "bsd",
+  "description": "OpenBSD kernel and base system",
+  "homepage": "https://www.openbsd.org",
+  "tar": "https://cdn.openbsd.org/pub/OpenBSD/${version}/sys.tar.gz",
+  "build": {
+    "system": "make",
+    "deps": [
+      "clang",
+      "make",
+      "binutils"
+    ],
+    "configure": [
+      "cd /usr/src/sys/arch/amd64/conf",
+      "config GENERIC"
+    ],
+    "compile": [
+      "cd ../compile/GENERIC",
+      "make"
+    ],
+    "install": [
+      "make install DESTDIR=$DESTDIR"
+    ]
+  }
+}

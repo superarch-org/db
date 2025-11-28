@@ -1,0 +1,33 @@
+{
+  "name": "systemd-boot",
+  "version": "258.3",
+  "category": "bootloader",
+  "license": "lgpl2.1",
+  "description": "Simple UEFI boot manager",
+  "homepage": "https://systemd.io",
+  "tar": "https://github.com/systemd/systemd/archive/v${version}.tar.gz",
+  "supports": {
+    "kernels": [
+      "linux"
+    ]
+  },
+  "build": {
+    "system": "meson",
+    "deps": [
+      "gcc",
+      "meson",
+      "ninja",
+      "python3",
+      "gnu-efi"
+    ],
+    "configure": [
+      "meson setup build --prefix=$PREFIX -Dgnu-efi=true -Dbootloader=enabled"
+    ],
+    "compile": [
+      "ninja -C build"
+    ],
+    "install": [
+      "DESTDIR=$DESTDIR ninja -C build install"
+    ]
+  }
+}
