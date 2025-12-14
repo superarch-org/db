@@ -1,0 +1,30 @@
+{
+  "name": "syslinux",
+  "version": "6.03",
+  "category": "bootloader",
+  "license": "gpl2",
+  "description": "Lightweight bootloader for Linux",
+  "homepage": "https://www.syslinux.org",
+  "tar": "https://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-${version}.tar.xz",
+  "supports": {
+    "kernels": [
+      "linux"
+    ]
+  },
+  "build": {
+    "system": "make",
+    "deps": [
+      "gcc",
+      "make",
+      "nasm",
+      "perl"
+    ],
+    "configure": [],
+    "compile": [
+      "make"
+    ],
+    "install": [
+      "make install DESTDIR=$DESTDIR INSTALLROOT=$DESTDIR"
+    ]
+  }
+}

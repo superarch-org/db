@@ -1,0 +1,36 @@
+{
+  "name": "glibc",
+  "version": "2.42",
+  "category": "libc",
+  "license": "lgpl2.1",
+  "description": "GNU C Library",
+  "homepage": "https://www.gnu.org/software/libc/",
+  "tar": "https://ftp.gnu.org/gnu/glibc/glibc-${version}.tar.xz",
+  "supports": {
+    "kernels": [
+      "linux"
+    ]
+  },
+  "build": {
+    "system": "autotools",
+    "deps": [
+      "gcc",
+      "make",
+      "bison",
+      "python3"
+    ],
+    "configure": [
+      "mkdir build",
+      "cd build",
+      "../configure --prefix=$PREFIX --enable-kernel=6.1"
+    ],
+    "compile": [
+      "cd build",
+      "make -j$(nproc)"
+    ],
+    "install": [
+      "cd build",
+      "make install DESTDIR=$DESTDIR"
+    ]
+  }
+}

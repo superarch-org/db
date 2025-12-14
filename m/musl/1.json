@@ -1,0 +1,30 @@
+{
+  "name": "musl",
+  "version": "1.2.5",
+  "category": "libc",
+  "license": "mit",
+  "description": "Lightweight, fast, simple C library",
+  "homepage": "https://musl.libc.org",
+  "tar": "https://musl.libc.org/releases/musl-${version}.tar.gz",
+  "supports": {
+    "kernels": [
+      "linux"
+    ]
+  },
+  "build": {
+    "system": "autotools",
+    "deps": [
+      "gcc",
+      "make"
+    ],
+    "configure": [
+      "./configure --prefix=$PREFIX"
+    ],
+    "compile": [
+      "make -j$(nproc)"
+    ],
+    "install": [
+      "make install DESTDIR=$DESTDIR"
+    ]
+  }
+}

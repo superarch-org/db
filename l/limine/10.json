@@ -1,0 +1,33 @@
+{
+  "name": "limine",
+  "version": "10.5.0",
+  "category": "bootloader",
+  "license": "bsd2",
+  "description": "Modern, advanced BIOS/UEFI multiprotocol bootloader",
+  "homepage": "https://limine-bootloader.org",
+  "git": "https://github.com/limine-bootloader/limine",
+  "tar": "https://github.com/limine-bootloader/limine/releases/download/v${version}/limine-${version}.tar.gz",
+  "supports": {
+    "kernels": [
+      "linux"
+    ]
+  },
+  "build": {
+    "system": "autotools",
+    "deps": [
+      "gcc",
+      "make",
+      "nasm",
+      "mtools"
+    ],
+    "configure": [
+      "./configure --prefix=$PREFIX --enable-uefi-x86-64 --enable-bios"
+    ],
+    "compile": [
+      "make -j$(nproc)"
+    ],
+    "install": [
+      "make install DESTDIR=$DESTDIR"
+    ]
+  }
+}
